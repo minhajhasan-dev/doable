@@ -1,0 +1,38 @@
+<div class="flex items-center justify-between mb-8">
+  <h1 class="text-3xl font-bold text-gray-900">Projects</h1>
+  <%= link_to new_project_path,
+    class: "inline-flex items-center gap-2 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold px-5 py-2.5 rounded-xl shadow-md hover:shadow-lg whitespace-nowrap transition-all duration-200" do %>
+    <%= heroicon "plus", variant: :solid, options: { width: "20", height: "20", style: "min-width: 20px;" } %>
+    <span class="whitespace-nowrap">New Project</span>
+  <% end %>
+</div>
+
+<% if @projects.any? %>
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+    <% @projects.each do |project| %>
+      <%= link_to project_path(project), class: "group block" do %>
+        <div class="bg-white rounded-2xl border border-gray-200 p-6 shadow-sm hover:shadow-md hover:border-indigo-300 transition-all duration-200 group-hover:-translate-y-0.5">
+          <div class="flex items-center space-x-3">
+            <div class="w-10 h-10 bg-indigo-100 rounded-xl flex items-center justify-center">
+              <span class="text-indigo-600 font-bold text-lg"><%= project.name.first.upcase %></span>
+            </div>
+            <div>
+              <h2 class="text-lg font-semibold text-gray-900 group-hover:text-indigo-600 transition-colors duration-200"><%= project.name %></h2>
+              <p class="text-sm text-gray-500"><%= pluralize(project.todos.count, "todo") %></p>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+<% else %>
+  <div class="text-center py-16">
+    <div class="w-16 h-16 bg-gray-100 rounded-2xl flex items-center justify-center mx-auto mb-4 text-gray-400">
+      <%= heroicon "folder-open", variant: :outline, options: { class: "w-10 h-10" } %>
+    </div>
+    <h3 class="text-lg font-semibold text-gray-900 mb-1">No projects yet</h3>
+    <p class="text-gray-500 mb-6">Get started by creating your first project.</p>
+    <%= link_to "Create a Project", new_project_path,
+      class: "inline-flex items-center gap-2 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold px-5 py-2.5 rounded-xl shadow-md transition-all duration-200" %>
+  </div>
+<% end %>

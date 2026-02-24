@@ -1,0 +1,82 @@
+<% content_for :title, "Doable — Your Project & Todo Manager" %>
+
+<!-- Hero Section -->
+<div class="text-center py-12 mb-6">
+  <div class="w-20 h-20 bg-indigo-100 rounded-3xl flex items-center justify-center mx-auto mb-6 shadow-sm">
+    <%= heroicon "check-badge", variant: :solid, options: { class: "w-12 h-12 text-indigo-600" } %>
+  </div>
+  <h1 class="text-4xl sm:text-5xl font-extrabold text-gray-900 tracking-tight mb-4">
+    Welcome to <span class="text-indigo-600">Doable</span>
+  </h1>
+  <p class="text-lg text-gray-500 max-w-xl mx-auto mb-8">
+    Organize your work into projects, break them into todos, and get things done — one task at a time.
+  </p>
+  <div class="flex items-center justify-center gap-4">
+    <%= link_to new_project_path,
+      class: "inline-flex items-center gap-2 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold px-6 py-3 rounded-xl shadow-md hover:shadow-lg whitespace-nowrap transition-all duration-200" do %>
+      <%= heroicon "plus", variant: :solid, options: { width: "20", height: "20", style: "min-width: 20px;" } %>
+      <span class="whitespace-nowrap">New Project</span>
+    <% end %>
+    <%= link_to "Browse Projects →", projects_path,
+      class: "inline-flex items-center px-6 py-3 border border-gray-300 text-sm font-semibold rounded-xl text-gray-700 bg-white hover:bg-gray-50 shadow-sm transition-all duration-200" %>
+  </div>
+</div>
+
+<!-- Stats Cards -->
+<div class="grid grid-cols-1 sm:grid-cols-3 gap-5 mb-12">
+  <div class="bg-white rounded-2xl border border-gray-200 shadow-sm p-6 text-center">
+    <div class="w-12 h-12 bg-indigo-100 rounded-xl flex items-center justify-center mx-auto mb-3">
+      <%= heroicon "folder", variant: :solid, options: { class: "w-6 h-6 text-indigo-600" } %>
+    </div>
+    <p class="text-3xl font-bold text-gray-900"><%= Project.count %></p>
+    <p class="text-sm text-gray-500 mt-1">Projects</p>
+  </div>
+  <div class="bg-white rounded-2xl border border-gray-200 shadow-sm p-6 text-center">
+    <div class="w-12 h-12 bg-emerald-100 rounded-xl flex items-center justify-center mx-auto mb-3">
+      <%= heroicon "check-circle", variant: :solid, options: { class: "w-6 h-6 text-emerald-600" } %>
+    </div>
+    <p class="text-3xl font-bold text-gray-900"><%= Todo.where(completed: true).count %></p>
+    <p class="text-sm text-gray-500 mt-1">Completed Todos</p>
+  </div>
+  <div class="bg-white rounded-2xl border border-gray-200 shadow-sm p-6 text-center">
+    <div class="w-12 h-12 bg-amber-100 rounded-xl flex items-center justify-center mx-auto mb-3">
+      <%= heroicon "clock", variant: :solid, options: { class: "w-6 h-6 text-amber-600" } %>
+    </div>
+    <p class="text-3xl font-bold text-gray-900"><%= Todo.where(completed: false).count %></p>
+    <p class="text-sm text-gray-500 mt-1">Remaining Todos</p>
+  </div>
+</div>
+
+<!-- Recent Projects -->
+<div class="mb-10">
+  <div class="flex items-center justify-between mb-5">
+    <h2 class="text-xl font-bold text-gray-900">Recent Projects</h2>
+    <%= link_to "View all →", projects_path,
+      class: "text-sm text-indigo-600 hover:text-indigo-800 font-medium transition-colors duration-200" %>
+  </div>
+
+  <% recent_projects = Project.order(created_at: :desc).limit(3) %>
+  <% if recent_projects.any? %>
+    <div class="grid grid-cols-1 sm:grid-cols-3 gap-5">
+      <% recent_projects.each do |project| %>
+        <%= link_to project_path(project), class: "group block" do %>
+          <div class="bg-white rounded-2xl border border-gray-200 p-5 shadow-sm hover:shadow-md hover:border-indigo-300 transition-all duration-200 group-hover:-translate-y-0.5">
+            <div class="flex items-center space-x-3">
+              <div class="w-10 h-10 bg-indigo-100 rounded-xl flex items-center justify-center">
+                <span class="text-indigo-600 font-bold text-lg"><%= project.name.first.upcase %></span>
+              </div>
+              <div>
+                <h3 class="font-semibold text-gray-900 group-hover:text-indigo-600 transition-colors duration-200"><%= project.name %></h3>
+                <p class="text-xs text-gray-500"><%= pluralize(project.todos.count, "todo") %></p>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+  <% else %>
+    <div class="bg-white rounded-2xl border border-gray-200 shadow-sm p-8 text-center">
+      <p class="text-gray-500">No projects yet. Create one to get started!</p>
+    </div>
+  <% end %>
+</div>

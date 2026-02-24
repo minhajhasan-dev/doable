@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html class="bg-gray-50">
+  <head>
+    <title><%= content_for(:title) || "Doable" %></title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="application-name" content="Doable">
+    <meta name="mobile-web-app-capable" content="yes">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= yield :head %>
+
+    <%# Enable PWA manifest for installable apps (make sure to enable in config/routes.rb too!) %>
+    <%#= tag.link rel: "manifest", href: pwa_manifest_path(format: :json) %>
+
+    <link rel="icon" href="/icon.png" type="image/png">
+    <link rel="icon" href="/icon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="/icon.png">
+
+    <%# Includes all stylesheet files in app/assets/stylesheets %>
+    <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
+  </head>
+
+  <body class="font-sans antialiased text-gray-800">
+    <!-- Navigation Bar -->
+    <nav class="bg-indigo-600 shadow-lg">
+      <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex items-center justify-between h-16">
+          <%= link_to root_path, class: "flex items-center space-x-2" do %>
+            <%= heroicon "check-badge", variant: :solid, options: { class: "w-8 h-8 text-white" } %>
+            <span class="text-white text-xl font-bold tracking-tight">Doable</span>
+          <% end %>
+          <div class="flex items-center space-x-1">
+            <%= link_to "Projects", projects_path,
+              class: "text-indigo-100 hover:bg-indigo-500 hover:text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors duration-200" %>
+            <%= link_to "Todos", todos_path,
+              class: "text-indigo-100 hover:bg-indigo-500 hover:text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors duration-200" %>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Flash Notices -->
+    <% if flash[:notice] %>
+      <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 mt-4">
+        <div class="bg-emerald-50 border border-emerald-200 text-emerald-700 px-4 py-3 rounded-xl flex items-center space-x-2 shadow-sm">
+          <%= heroicon "check-circle", variant: :solid, options: { class: "w-6 h-6" } %>
+          <p class="text-sm font-medium"><%= flash[:notice] %></p>
+        </div>
+      </div>
+    <% end %>
+
+    <% if flash[:alert] %>
+      <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 mt-4">
+        <div class="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-xl flex items-center space-x-2 shadow-sm">
+          <%= heroicon "exclamation-triangle", variant: :solid, options: { class: "w-6 h-6" } %>
+          <p class="text-sm font-medium"><%= flash[:alert] %></p>
+        </div>
+      </div>
+    <% end %>
+
+    <!-- Main Content -->
+    <main class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <%= yield %>
+    </main>
+  </body>
+</html>

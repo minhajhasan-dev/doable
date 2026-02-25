@@ -2,8 +2,10 @@
   <h1 class="text-3xl font-bold text-gray-900">Projects</h1>
   <%= link_to new_project_path,
     class: "inline-flex items-center gap-2 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold px-5 py-2.5 rounded-xl shadow-md hover:shadow-lg whitespace-nowrap transition-all duration-200" do %>
-    <%= heroicon "plus", variant: :solid, options: { width: "20", height: "20", style: "min-width: 20px;" } %>
-    <span class="whitespace-nowrap">New Project</span>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="shrink-0" width="20" height="20">
+      <path d="M10.75 4.75a.75.75 0 0 0-1.5 0v4.5h-4.5a.75.75 0 0 0 0 1.5h4.5v4.5a.75.75 0 0 0 1.5 0v-4.5h4.5a.75.75 0 0 0 0-1.5h-4.5v-4.5Z" />
+    </svg>
+    <span>New Project</span>
   <% end %>
 </div>
 
@@ -28,7 +30,9 @@
 <% else %>
   <div class="text-center py-16">
     <div class="w-16 h-16 bg-gray-100 rounded-2xl flex items-center justify-center mx-auto mb-4 text-gray-400">
-      <%= heroicon "folder-open", variant: :outline, options: { class: "w-10 h-10" } %>
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-10 h-10">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 9.776c.112-.017.227-.026.344-.026h15.812c.117 0 .232.009.344.026m-16.5 0a2.25 2.25 0 0 0-1.883 2.542l.857 6a2.25 2.25 0 0 0 2.227 1.932H19.05a2.25 2.25 0 0 0 2.227-1.932l.857-6a2.25 2.25 0 0 0-1.883-2.542m-16.5 0V6A2.25 2.25 0 0 1 6 3.75h3.879a1.5 1.5 0 0 1 1.06.44l2.122 2.12a1.5 1.5 0 0 0 1.06.44H18A2.25 2.25 0 0 1 20.25 9v.776" />
+      </svg>
     </div>
     <h3 class="text-lg font-semibold text-gray-900 mb-1">No projects yet</h3>
     <p class="text-gray-500 mb-6">Get started by creating your first project.</p>

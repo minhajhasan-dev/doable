@@ -4,8 +4,10 @@
   <h1 class="text-3xl font-bold text-gray-900">Todos</h1>
   <%= link_to new_todo_path,
     class: "inline-flex items-center gap-2 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold px-5 py-2.5 rounded-xl shadow-md hover:shadow-lg whitespace-nowrap transition-all duration-200" do %>
-    <%= heroicon "plus", variant: :solid, options: { width: "20", height: "20", style: "min-width: 20px;" } %>
-    <span class="whitespace-nowrap">New Todo</span>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="shrink-0" width="20" height="20">
+      <path d="M10.75 4.75a.75.75 0 0 0-1.5 0v4.5h-4.5a.75.75 0 0 0 0 1.5h4.5v4.5a.75.75 0 0 0 1.5 0v-4.5h4.5a.75.75 0 0 0 0-1.5h-4.5v-4.5Z" />
+    </svg>
+    <span>New Todo</span>
   <% end %>
 </div>
 
@@ -24,7 +26,9 @@
 <% else %>
   <div class="text-center py-16">
     <div class="w-16 h-16 bg-gray-100 rounded-2xl flex items-center justify-center mx-auto mb-4 text-gray-400">
-      <%= heroicon "list-bullet", variant: :outline, options: { class: "w-10 h-10" } %>
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-10 h-10">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 6.75h12M8.25 12h12m-12 5.25h12M3.75 6.75h.007v.008H3.75V6.75Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0ZM3.75 12h.007v.008H3.75V12Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm-.375 5.25h.007v.008H3.75v-.008Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z" />
+      </svg>
     </div>
     <h3 class="text-lg font-semibold text-gray-900 mb-1">No todos yet</h3>
     <p class="text-gray-500 mb-6">Get started by creating your first todo.</p>
